@@ -63,7 +63,7 @@ plugins+=(zsh-nvm)
 Clone this repository somewhere (`~/.zsh-nvm` for example)
 
 ```shell
-git clone git@github.com:lukechilds/zsh-nvm.git ~/.zsh-nvm
+git clone https://github.com/lukechilds/zsh-nvm.git ~/.zsh-nvm
 ```
 Then source it in your `.zshrc`
 
