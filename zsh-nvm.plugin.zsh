@@ -28,3 +28,6 @@ _zsh_nvm_install() {
 
 # Install nvm if it isn't already installed
 [[ ! -f "$NVM_DIR/nvm.sh" ]] && _zsh_nvm_install
+
+# If nvm is installed, source it
+[[ -f "$NVM_DIR/nvm.sh" ]] && source "$NVM_DIR/nvm.sh"
