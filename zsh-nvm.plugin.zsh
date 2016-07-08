@@ -26,10 +26,10 @@ _zsh_nvm_install() {
 }
 
 nvm_update() {
-  echo "Checking latest version of nvm..."
   local installed_version=$(cd "$NVM_DIR" && git describe --tags)
-  local latest_version=$(_zsh_nvm_latest_release_tag)
   echo "Installed version is $installed_version"
+  echo "Checking latest version of nvm..."
+  local latest_version=$(_zsh_nvm_latest_release_tag)
   if [[ "$installed_version" = "$latest_version" ]]; then
     echo "You're already up to date"
   else
