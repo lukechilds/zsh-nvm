@@ -60,15 +60,15 @@ plugins+=(zsh-nvm)
 ```
 
 ### Manually
-Clone this repository somewhere (`~/zsh-nvm` for example)
+Clone this repository somewhere (`~/.zsh-nvm` for example)
 
 ```shell
-git clone git@github.com:lukechilds/zsh-nvm.git ~/zsh-nvm
+git clone git@github.com:lukechilds/zsh-nvm.git ~/.zsh-nvm
 ```
 Then source it in your `.zshrc`
 
 ```shell
-source ~/zsh-nvm/zsh-nvm.sh
+source ~/.zsh-nvm/zsh-nvm.plugin.zsh
 ```
 
 ## License
