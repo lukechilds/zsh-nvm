@@ -1,6 +1,4 @@
-if [ -z "$NVM_DIR" ]; then
-  NVM_DIR="$HOME/.nvm"
-fi
+[[ -z "$NVM_DIR" ]] && NVM_DIR="$HOME/.nvm"
 
 _zsh_nvm_has() {
   type "$1" > /dev/null 2>&1
