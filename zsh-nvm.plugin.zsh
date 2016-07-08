@@ -19,3 +19,9 @@ _zsh_nvm_latest_release_tag() {
     grep '"tag_name":' |                                                        # Get tag line
     sed -E 's/.*"([^"]+)".*/\1/'                                                # Pluck JSON value
 }
+
+_zsh_nvm_install() {
+  git clone https://github.com/creationix/nvm.git "$NVM_DIR"
+  cd "$NVM_DIR"
+  git checkout --quiet "$(_zsh_nvm_latest_release_tag)"
+}
