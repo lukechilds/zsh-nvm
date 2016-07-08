@@ -25,3 +25,6 @@ _zsh_nvm_install() {
   cd "$NVM_DIR"
   git checkout --quiet "$(_zsh_nvm_latest_release_tag)"
 }
+
+# Install nvm if it isn't already installed
+[[ ! -f "$NVM_DIR/nvm.sh" ]] && _zsh_nvm_install
