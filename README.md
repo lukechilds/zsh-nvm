@@ -71,6 +71,10 @@ Then source it in your `.zshrc`
 source ~/.zsh-nvm/zsh-nvm.plugin.zsh
 ```
 
+## Related
+
+- [`zsh-better-npm-completion`](https://github.com/lukechilds/zsh-better-npm-completion) - Better completion for `npm`
+
 ## License
 
 MIT © Luke Childs
