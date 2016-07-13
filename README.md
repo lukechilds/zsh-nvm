@@ -6,6 +6,8 @@
 
 The plugin will install the latest stable release of `nvm` if you don't already have it, and then automatically `source` it for you. You can upgrade `nvm` to the latest version whenever you want without losing your installed `node` versions by running `nvm_update`.
 
+Although this is written as a zsh plugin, it also works with bash if you follow the [manual installation instructions](#manually).
+
 ## Usage
 
 Once the plugin's installed you don't really need to do anything, `nvm` will be available. You'll probably want to load this as one of your first plugins so `node`/`npm` is available for any other plugins that may require it.
@@ -65,7 +67,7 @@ Clone this repository somewhere (`~/.zsh-nvm` for example)
 ```shell
 git clone https://github.com/lukechilds/zsh-nvm.git ~/.zsh-nvm
 ```
-Then source it in your `.zshrc`
+Then source it in your `.zshrc` (or `.bashrc`)
 
 ```shell
 source ~/.zsh-nvm/zsh-nvm.plugin.zsh
