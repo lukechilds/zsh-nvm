@@ -33,7 +33,7 @@ nvm_update() {
     echo "You're already up to date"
   else
     echo "Updating to $latest_version..."
-    $(cd "$NVM_DIR" && git fetch && git checkout "$latest_version")
+    $(cd "$NVM_DIR" && git fetch --quiet && git checkout "$latest_version")
     source "$NVM_DIR/nvm.sh"
   fi
 }
