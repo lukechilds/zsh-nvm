@@ -10,7 +10,7 @@ Although this is written as a zsh plugin, it also works with bash if you follow 
 
 ## Usage
 
-Once the plugin's installed you don't really need to do anything, `nvm` will be available. You'll probably want to load this as one of your first plugins so `node`/`npm` is available for any other plugins that may require it.
+Once the plugin's installed `nvm` will be available. You'll probably want to load this as one of your first plugins so `node`/`npm` is available for any other plugins that may require them.
 
 If you want to update `nvm`:
 
