@@ -30,28 +30,7 @@ _zsh_nvm_install() {
   $(cd "$NVM_DIR" && git checkout --quiet "$(_zsh_nvm_latest_release_tag)")
 }
 
-nvm_update() {
-  echo 'Deprecated, please use `nvm upgrade`'
-}
-_zsh_nvm_upgrade() {
-  local installed_version=$(cd "$NVM_DIR" && git describe --tags)
-  echo "Installed version is $installed_version"
-  echo "Checking latest version of nvm..."
-  local latest_version=$(_zsh_nvm_latest_release_tag)
-  if [[ "$installed_version" = "$latest_version" ]]; then
-    echo "You're already up to date"
-  else
-    echo "Updating to $latest_version..."
-    $(cd "$NVM_DIR" && git fetch --quiet && git checkout "$latest_version")
-    source "$NVM_DIR/nvm.sh"
-  fi
-}
-
-# Install nvm if it isn't already installed
-[[ ! -f "$NVM_DIR/nvm.sh" ]] && _zsh_nvm_install
-
-# If nvm is installed
-if [[ -f "$NVM_DIR/nvm.sh" ]]; then
+_zsh_nvm_load() {
 
   # Source nvm
   source "$NVM_DIR/nvm.sh"
@@ -70,4 +49,27 @@ if [[ -f "$NVM_DIR/nvm.sh" ]]; then
         ;;
     esac
   }
-fi
+}
+
+nvm_update() {
+  echo 'Deprecated, please use `nvm upgrade`'
+}
+_zsh_nvm_upgrade() {
+  local installed_version=$(cd "$NVM_DIR" && git describe --tags)
+  echo "Installed version is $installed_version"
+  echo "Checking latest version of nvm..."
+  local latest_version=$(_zsh_nvm_latest_release_tag)
+  if [[ "$installed_version" = "$latest_version" ]]; then
+    echo "You're already up to date"
+  else
+    echo "Updating to $latest_version..."
+    $(cd "$NVM_DIR" && git fetch --quiet && git checkout "$latest_version")
+    _zsh_nvm_load
+  fi
+}
+
+# Install nvm if it isn't already installed
+[[ ! -f "$NVM_DIR/nvm.sh" ]] && _zsh_nvm_install
+
+# If nvm is installed, load it
+[[ -f "$NVM_DIR/nvm.sh" ]] && _zsh_nvm_load
