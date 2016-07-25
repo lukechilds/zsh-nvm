@@ -57,6 +57,14 @@ nvm_update() {
   echo 'Deprecated, please use `nvm upgrade`'
 }
 _zsh_nvm_upgrade() {
+
+  # Use default upgrade if it's built in
+  if _zsh_nvm_nvm --help | grep -q 'nvm upgrade'; then
+    _zsh_nvm_nvm upgrade
+    return
+  fi
+
+  # Otherwise use our own
   local installed_version=$(cd "$NVM_DIR" && git describe --tags)
   echo "Installed version is $installed_version"
   echo "Checking latest version of nvm..."
