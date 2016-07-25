@@ -1,3 +1,5 @@
+ZSH_NVM_DIR=${0:a:h}
+
 [[ -z "$NVM_DIR" ]] && NVM_DIR="$HOME/.nvm"
 
 _zsh_nvm_rename_function() {
@@ -63,6 +65,7 @@ _zsh_nvm_upgrade() {
     echo "You're already up to date"
   else
     echo "Updating to $latest_version..."
+    echo "$installed_version" > "$ZSH_NVM_DIR/previous_version"
     $(cd "$NVM_DIR" && git fetch --quiet && git checkout "$latest_version")
     _zsh_nvm_load
   fi
