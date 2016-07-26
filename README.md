@@ -12,15 +12,31 @@ Although this is written as a zsh plugin, it also works with bash if you follow 
 
 Once the plugin's installed `nvm` will be available. You'll probably want to load this as one of your first plugins so `node`/`npm` is available for any other plugins that may require them.
 
-If you want to update `nvm`:
+`zsh-nvm` also wraps `nvm` in some additional functionality.
+
+### Upgrade
+
+If you want to upgrade to the latest release of `nvm`:
 
 ```shell
 % nvm upgrade
-Installed version is v0.31.1
+Installed version is v0.31.0
 Checking latest version of nvm...
-Updating to v0.31.2...
-Previous HEAD position was ec2f450... v0.31.1
-HEAD is now at 9f5322e... v0.31.2
+Updating to v0.31.3...
+Previous HEAD position was 2176894... v0.31.0
+HEAD is now at 56417f8... v0.31.3
+```
+
+### Revert
+
+If an upgrade breaks something don't worry, reverting back to the previously installed version is simple:
+
+```shell
+% nvm revert
+Installed version is v0.31.3
+Reverting to v0.31.0...
+Previous HEAD position was 56417f8... v0.31.3
+HEAD is now at 2176894... v0.31.0
 ```
 
 ## Installation
