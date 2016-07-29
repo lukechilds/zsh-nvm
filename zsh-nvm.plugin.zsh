@@ -1,6 +1,6 @@
 ZSH_NVM_DIR=${0:a:h}
 
-[[ -z "$NVM_DIR" ]] && NVM_DIR="$HOME/.nvm"
+[[ -z "$NVM_DIR" ]] && export NVM_DIR="$HOME/.nvm"
 
 _zsh_nvm_rename_function() {
   test -n "$(declare -f $1)" || return
