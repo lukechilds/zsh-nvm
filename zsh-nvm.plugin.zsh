@@ -62,7 +62,7 @@ nvm_update() {
 _zsh_nvm_upgrade() {
 
   # Use default upgrade if it's built in
-  if [[ "$(_zsh_nvm_nvm help | grep 'nvm upgrade')" ]]; then
+  if [[ -n "$(_zsh_nvm_nvm help | grep 'nvm upgrade')" ]]; then
     _zsh_nvm_nvm upgrade
     return
   fi
@@ -88,7 +88,7 @@ _zsh_nvm_previous_version() {
 
 _zsh_nvm_revert() {
   local previous_version="$(_zsh_nvm_previous_version)"
-  if [[ $previous_version ]]; then
+  if [[ -n "$previous_version" ]]; then
     local installed_version=$(cd "$NVM_DIR" && git describe --tags)
     if [[ "$installed_version" = "$previous_version" ]]; then
       echo "Already reverted to $installed_version"
