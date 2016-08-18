@@ -39,6 +39,19 @@ Previous HEAD position was 56417f8... v0.31.3
 HEAD is now at 2176894... v0.31.0
 ```
 
+## Options
+
+### Custom Directory
+
+You can specify a custom directory to use with `nvm` by exporting the `NVM_DIR` environment variable. It must be set before `zsh-nvm` is loaded. For example, if you are using antigen, you would put the following in your `.zshrc`:
+
+```shell
+export NVM_DIR="$HOME/.custom-nvm-dir"
+antigen bundle lukechilds/zsh-nvm
+```
+
+Note: If `nvm` doesn't exist in this directory it'll be automatically installed when you start a session.
+
 ## Installation
 
 ### Using [Antigen](https://github.com/zsh-users/antigen)
