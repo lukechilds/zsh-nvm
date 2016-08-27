@@ -22,6 +22,13 @@ _zsh_nvm_install() {
   $(cd "$NVM_DIR" && git checkout --quiet "$(_zsh_nvm_latest_release_tag)")
 }
 
+_zsh_nvm_global_binaries() {
+  ls "$NVM_DIR"/versions/*/*/bin/* |
+    xargs basename |
+    sort |
+    uniq
+}
+
 _zsh_nvm_load() {
 
   # Source nvm
@@ -49,17 +56,17 @@ _zsh_nvm_load() {
 _zsh_nvm_lazy_load() {
 
   # Get all global node module binaries (including node)
-  local node_globals=($(ls "$NVM_DIR"/versions/*/*/bin/* | xargs basename | sort | uniq))
+  local global_binaries=($(_zsh_nvm_global_binaries))
 
   # Add nvm
-  node_globals+=('nvm')
+  global_binaries+=('nvm')
 
   # Create function for each command
-  for cmd in $node_globals; do
+  for cmd in $global_binaries; do
 
     # When called, unset all lazy loaders, load nvm then run current command
     eval "$cmd(){
-      unset -f $node_globals
+      unset -f $global_binaries
       _zsh_nvm_load
       $cmd \"\$@\"
     }"
