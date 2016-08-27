@@ -46,6 +46,26 @@ _zsh_nvm_load() {
   }
 }
 
+_zsh_nvm_lazy_load() {
+
+  # Get all global node module binaries (including node)
+  local node_globals=($(ls ~/.nvm/versions/*/*/bin/* | xargs basename | sort | uniq))
+
+  # Add nvm
+  node_globals+=('nvm')
+
+  # Create function for each command
+  for cmd in $node_globals; do
+
+    # When called, unset all lazy loaders, load nvm then run current command
+    eval "$cmd(){
+      unset -f $node_globals
+      _zsh_nvm_load
+      $cmd \"\$@\"
+    }"
+  done
+}
+
 nvm_update() {
   echo 'Deprecated, please use `nvm upgrade`'
 }
