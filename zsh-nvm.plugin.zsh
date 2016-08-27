@@ -49,7 +49,7 @@ _zsh_nvm_load() {
 _zsh_nvm_lazy_load() {
 
   # Get all global node module binaries (including node)
-  local node_globals=($(ls ~/.nvm/versions/*/*/bin/* | xargs basename | sort | uniq))
+  local node_globals=($(ls "$NVM_DIR"/versions/*/*/bin/* | xargs basename | sort | uniq))
 
   # Add nvm
   node_globals+=('nvm')
