@@ -58,7 +58,7 @@ Note: If `nvm` doesn't exist in this directory it'll be automatically installed 
 
 If you find `nvm` adds too much lag to your shell startup you can enable lazy loading by exporting the `NVM_LAZY_LOAD` environment variable and setting it to `true`. It must be set before `zsh-nvm` is loaded.
 
-Lazy loading is around 70 times faster to load, however the first time you run `nvm`, `npm`, `node` or a global module you'll get a slight delay while `nvm` loads first. You'll only get this delay once per session.
+Lazy loading is around 70x faster to load (874ms down to 12ms for me), however the first time you run `nvm`, `npm`, `node` or a global module you'll get a slight delay while `nvm` loads first. You'll only get this delay once per session.
 
 For example, if you are using antigen, you would put the following in your `.zshrc`:
 
