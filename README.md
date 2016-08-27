@@ -73,7 +73,7 @@ Performance comparison:
 % time (_zsh_nvm_load)
 ( _zsh_nvm_load; )  0.58s user 0.37s system 109% cpu 0.874 total
 
-$ time (_zsh_nvm_lazy_load)
+% time (_zsh_nvm_lazy_load)
 ( _zsh_nvm_lazy_load; )  0.01s user 0.01s system 168% cpu 0.012 total
 ```
 
