@@ -54,6 +54,29 @@ antigen bundle lukechilds/zsh-nvm
 
 Note: If `nvm` doesn't exist in this directory it'll be automatically installed when you start a session.
 
+### Lazy Loading (experimental)
+
+If you find `nvm` adds too much lag to your shell startup you can enable lazy loading by exporting the `NVM_LAZY_LOAD` environment variable and setting it to `true`. Lazy loading is around 70 times faster to load, however the first time you run `nvm`, `npm`, `node` or a global module you'll get a slight delay while `nvm` loads first. You'll only get this delay once per session.
+
+For example, if you are using antigen, you would put the following in your `.zshrc`:
+
+```shell
+export NVM_LAZY_LOAD=true
+antigen bundle lukechilds/zsh-nvm
+```
+
+Performance comparison:
+
+```shell
+% time (_zsh_nvm_load)
+( _zsh_nvm_load; )  0.58s user 0.37s system 109% cpu 0.874 total
+
+$ time (_zsh_nvm_lazy_load)
+( _zsh_nvm_lazy_load; )  0.01s user 0.01s system 168% cpu 0.012 total
+```
+
+Note: This feature is experimental, use with caution.
+
 ## Installation
 
 ### Using [Antigen](https://github.com/zsh-users/antigen)
