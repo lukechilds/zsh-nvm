@@ -43,7 +43,9 @@ HEAD is now at 2176894... v0.31.0
 
 ### Custom Directory
 
-You can specify a custom directory to use with `nvm` by exporting the `NVM_DIR` environment variable. It must be set before `zsh-nvm` is loaded. For example, if you are using antigen, you would put the following in your `.zshrc`:
+You can specify a custom directory to use with `nvm` by exporting the `NVM_DIR` environment variable. It must be set before `zsh-nvm` is loaded.
+
+For example, if you are using antigen, you would put the following in your `.zshrc`:
 
 ```shell
 export NVM_DIR="$HOME/.custom-nvm-dir"
