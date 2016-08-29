@@ -24,7 +24,7 @@ _zsh_nvm_install() {
 
 _zsh_nvm_global_binaries() {
   echo "$NVM_DIR"/v0*/bin/*(N) "$NVM_DIR"/versions/*/*/bin/*(N) |
-    xargs basename |
+    xargs -n 1 basename |
     sort |
     uniq
 }
