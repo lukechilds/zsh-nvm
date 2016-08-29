@@ -23,7 +23,7 @@ _zsh_nvm_install() {
 }
 
 _zsh_nvm_global_binaries() {
-  ls "$NVM_DIR"/v0*/bin/*(N) "$NVM_DIR"/versions/*/*/bin/*(N) |
+  echo "$NVM_DIR"/v0*/bin/*(N) "$NVM_DIR"/versions/*/*/bin/*(N) |
     xargs basename |
     sort |
     uniq
