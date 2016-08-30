@@ -117,6 +117,8 @@ Then load as a plugin in your `.zshrc`
 plugins+=(zsh-nvm)
 ```
 
+Keep in mind that plugins need to be added before `oh-my-zsh.sh` is sourced.
+
 ### Manually
 Clone this repository somewhere (`~/.zsh-nvm` for example)
 
