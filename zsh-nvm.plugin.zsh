@@ -56,7 +56,8 @@ _zsh_nvm_load() {
 _zsh_nvm_lazy_load() {
 
   # Get all global node module binaries (including node)
-  local global_binaries=($(_zsh_nvm_global_binaries))
+  local global_binaries
+  global_binaries=($(_zsh_nvm_global_binaries))
 
   # Add nvm
   global_binaries+=('nvm')
