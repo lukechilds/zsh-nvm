@@ -38,8 +38,12 @@ _zsh_nvm_global_binaries() {
 
 _zsh_nvm_load() {
 
-  # Source nvm
-  source "$NVM_DIR/nvm.sh"
+  # Source nvm (check if `nvm use` should be ran after load)
+  if [[ "$NVM_NO_USE" == true ]]; then
+    source "$NVM_DIR/nvm.sh" --no-use
+  else
+    source "$NVM_DIR/nvm.sh"
+  fi
 
   # Rename main nvm function
   _zsh_nvm_rename_function nvm _zsh_nvm_nvm
