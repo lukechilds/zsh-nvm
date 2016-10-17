@@ -1,0 +1,10 @@
+source ../common.sh
+
+# Check ZSH_NVM_DIR isn't already set
+[[ -z ${ZSH_NVM_DIR+x} ]] || die "ZSH_NVM_DIR already set"
+
+# Load zsh-nvm
+load_zsh_nvm
+
+# Check ZSH_NVM_DIR is now set
+[[ ! -z ${ZSH_NVM_DIR+x} ]] || die "ZSH_NVM_DIR wasn't set"
