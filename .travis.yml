@@ -1,4 +1,7 @@
 language: generic
+os:
+  - linux
+  - osx
 addons:
   apt:
     packages:
