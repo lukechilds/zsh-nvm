@@ -1,0 +1,16 @@
+source ../common.sh
+
+# We don't need to actually load nvm for this test
+export ZSH_NVM_NO_LOAD=true
+
+# Unset NVM_DIR
+unset NVM_DIR
+
+# Check NVM_DIR is unset
+[[ -z "$NVM_DIR" ]] || die "NVM_DIR already set"
+
+# Load zsh-nvm
+load_zsh_nvm
+
+# Check NVM_DIR is now set to our default
+[[ "$NVM_DIR" == "$HOME/.nvm" ]] || die "NVM_DIR wasn't set to \$HOME/.nvm"
