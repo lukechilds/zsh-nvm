@@ -1,0 +1,10 @@
+source ../common.sh
+
+# Check nvm isn't already installed
+[[ ! -f "$NVM_DIR/nvm.sh" ]] || die "nvm is already installed $NVM_DIR/nvm.sh"
+
+# Load zsh-nvm
+load_zsh_nvm
+
+# Check nvm is now installed
+[[ -f "$NVM_DIR/nvm.sh" ]] || die "nvm wasn't installed"
