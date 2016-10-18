@@ -144,12 +144,17 @@ _zsh_nvm_revert() {
   fi
 }
 
-# Install nvm if it isn't already installed
-[[ ! -f "$NVM_DIR/nvm.sh" ]] && _zsh_nvm_install
+# Don't init anything if this is true (debug/testing only)
+if [[ "$ZSH_NVM_NO_LOAD" != true ]]; then
 
-# If nvm is installed
-if [[ -f "$NVM_DIR/nvm.sh" ]]; then
+  # Install nvm if it isn't already installed
+  [[ ! -f "$NVM_DIR/nvm.sh" ]] && _zsh_nvm_install
 
-  # Load it
-  [[ "$NVM_LAZY_LOAD" == true ]] && _zsh_nvm_lazy_load || _zsh_nvm_load
+  # If nvm is installed
+  if [[ -f "$NVM_DIR/nvm.sh" ]]; then
+
+    # Load it
+    [[ "$NVM_LAZY_LOAD" == true ]] && _zsh_nvm_lazy_load || _zsh_nvm_load
+  fi
+
 fi
