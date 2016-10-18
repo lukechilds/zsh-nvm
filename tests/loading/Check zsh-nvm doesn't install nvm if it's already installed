@@ -1,0 +1,16 @@
+source ../common.sh
+
+nvm_placeholder="nvm placeholder"
+
+# Fake nvm installation
+mkdir "$NVM_DIR"
+echo "$nvm_placeholder" > "$NVM_DIR/nvm.sh"
+
+# Check fake nvm file is there
+[[ -f "$NVM_DIR/nvm.sh" ]] || die "Fake nvm file wasn't created"
+
+# Load zsh-nvm
+load_zsh_nvm
+
+# Check fake nvm installation wasn't overwritten
+[[ $(cat "$NVM_DIR/nvm.sh") == "$nvm_placeholder" ]] || die "Existing nvm installation was overwritten"
