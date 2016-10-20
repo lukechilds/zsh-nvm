@@ -1,0 +1,23 @@
+source ../common.sh
+
+# Version to revert nvm to
+revert_version=v0.32.0
+
+# Load zsh-nvm
+load_zsh_nvm
+
+# Save latest version
+latest_version=$(nvm --version)
+
+# Roll back to an old version
+echo "$revert_version" > "$ZSH_NVM_DIR/previous_version"
+nvm revert
+
+# Check rollback worked
+[[ "v$(nvm --version)" == "$revert_version" ]] || die "Couldn't rollback nvm version"
+
+# Attempt to upgrade
+nvm upgrade
+
+# Check upgrade worked
+[[ "$(nvm --version)" == "$latest_version" ]] || die "Couldn't upgrade nvm to latest version ($latest_version)"
