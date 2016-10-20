@@ -1,3 +1,4 @@
+#!/bin/sh
 source ../common.sh
 
 # We don't need to actually load nvm for this test

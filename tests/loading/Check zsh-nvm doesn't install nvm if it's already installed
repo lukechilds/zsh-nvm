@@ -1,3 +1,4 @@
+#!/bin/sh
 source ../common.sh
 
 nvm_placeholder="nvm placeholder"
