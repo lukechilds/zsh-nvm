@@ -1,0 +1,19 @@
+source ../common.sh
+
+# Version to revert nvm to
+revert_version=v0.32.0
+
+# Load zsh-nvm
+load_zsh_nvm
+
+# Check current version isn't revert version
+[[ "v$(nvm --version)" != "$revert_version" ]] || die "Revert version ($revert_version) already installed"
+
+# Fake revert file
+echo "$revert_version" > "$ZSH_NVM_DIR/previous_version"
+
+# Attempt to revert
+nvm revert
+
+# Check current version is now revert version
+[[ "v$(nvm --version)" == "$revert_version" ]] || die "Couldn't revert to $revert_version"
