@@ -1,3 +1,4 @@
+#!/bin/sh
 source ../common.sh
 
 # Check nvm isn't already loaded
