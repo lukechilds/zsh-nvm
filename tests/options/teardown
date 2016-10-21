@@ -1,2 +1,2 @@
 #!/bin/sh
-rm -rf ../../.nvm
+rm -rf ../.nvm
