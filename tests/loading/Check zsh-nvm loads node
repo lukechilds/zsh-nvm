@@ -1,0 +1,17 @@
+#!/bin/sh
+source ../common.sh
+
+# Node.js version to install
+node_version=v5.11.0
+
+# Load zsh-nvm and install Node.js in subshell
+(load_zsh_nvm && nvm install "$node_version" && [[ "$(node --version)" == "$node_version" ]]) || die "node wasn't installed"
+
+# Check node isn't available
+[[ "$(node --version)" != "$node_version" ]] || die "node shouldn't be available $(node --version)"
+
+# Load zsh-nvm
+load_zsh_nvm
+
+# Check node is automatically loaded
+[[ "$(node --version)" == "$node_version" ]] || die "node wasn't loaded"
