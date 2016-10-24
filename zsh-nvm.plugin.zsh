@@ -78,12 +78,19 @@ _zsh_nvm_lazy_load() {
   # Add nvm
   global_binaries+=('nvm')
 
+  # Remove any binaries that conflict with current globals
+  local cmds
+  cmds=()
+  for bin in $global_binaries; do
+    _zsh_nvm_has $bin || cmds+=($bin)
+  done
+
   # Create function for each command
-  for cmd in $global_binaries; do
+  for cmd in $cmds; do
 
     # When called, unset all lazy loaders, load nvm then run current command
     eval "$cmd(){
-      unset -f $global_binaries
+      unset -f $cmds
       _zsh_nvm_load
       $cmd \"\$@\"
     }"
