@@ -1,0 +1,26 @@
+#!/bin/sh
+source ../common.sh
+
+# Node.js version to install
+node_version=v5.11.0
+
+# Load zsh-nvm and install Node.js in subshell
+(load_zsh_nvm && nvm install "$node_version" && [[ "$(node --version)" == "$node_version" ]]) || die "node wasn't installed"
+
+# Check node isn't available
+[[ "$(node --version)" != "$node_version" ]] || die "node shouldn't be available $(node --version)"
+
+# Set NVM_LAZY_LOAD to true
+export NVM_LAZY_LOAD=true
+
+# Load zsh-nvm
+load_zsh_nvm
+
+# Check node is a lazy load function
+[[ $(command -v node) == "node" ]] || die "node should be a shell function"
+
+# Init lazy loader
+node --version || die "couldn't run lazy loader"
+
+# Check node is a binary
+[[ "$(command -v node)" != "node" ]] || die "node should now be a binary"
