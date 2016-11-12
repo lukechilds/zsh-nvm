@@ -8,6 +8,7 @@ addons:
       - zsh
 before_install:
   - zsh --version
+  - if [[ "$TRAVIS_OS_NAME" == "osx" ]]; then brew uninstall node; fi
   - if [[ $(command -v nvm) == "nvm" ]]; then nvm deactivate && nvm unload && echo "Deactivated Travis nvm"; fi
 install:
   - (mkdir /tmp/urchin && cd /tmp/urchin && curl -s "$(curl -s https://registry.npmjs.com/urchin | grep -Eo '"tarball":\s*"[^"]+"' | tail -n 1 | awk -F\" '{ print $4 }')" -O && tar -x -f urchin*)
