@@ -144,6 +144,24 @@ Then source it in your `.zshrc` (or `.bashrc`)
 source ~/.zsh-nvm/zsh-nvm.plugin.zsh
 ```
 
+## Tests
+
+To run the tests you'll need to install [Urchin](https://github.com/tlevine/urchin#install). You'll also need to run the tests in an environment that doesn't already have `node` or `nvm` loaded.
+
+You can remove `nvm` from the existing session with:
+
+```shell
+nvm deactivate && nvm unload
+```
+
+Run the tests with:
+
+```shell
+urchin -s zsh tests
+```
+
+
+
 ## Related
 
 - [`zsh-better-npm-completion`](https://github.com/lukechilds/zsh-better-npm-completion) - Better completion for `npm`
