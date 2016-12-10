@@ -23,4 +23,4 @@ load_zsh_nvm
 nvm use "$node_version"
 
 # Check node is a binary
-[[ "$(command -v node)" != "node" ]] || die "node should now be a binary"
+[[ "$(command -v node)" == "$(nvm_version_path $node_version)/bin/node" ]] || die "node should now be a binary"
