@@ -18,3 +18,9 @@ load_zsh_nvm
 
 # Check node still isn't available
 [[ "$(node --version)" != "$node_version" ]] || die "node shouldn't be available $(node --version)"
+
+# Manually load node
+nvm use "$node_version"
+
+# Check node is a binary
+[[ "$(command -v node)" != "node" ]] || die "node should now be a binary"
