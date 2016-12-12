@@ -19,8 +19,14 @@ load_zsh_nvm
 # Check node is a lazy load function
 [[ $(command -v node) == "node" ]] || die "node should be a shell function"
 
+# Check npm is a lazy load function
+[[ $(command -v npm) == "npm" ]] || die "npm should be a shell function"
+
 # Init lazy loader
 node --version || die "couldn't run lazy loader"
 
 # Check node is a binary
 [[ "$(command -v node)" == "$(nvm_version_path $node_version)/bin/node" ]] || die "node should now be a binary"
+
+# Check npm is a binary
+[[ "$(command -v npm)" == "$(nvm_version_path $node_version)/bin/npm" ]] || die "npm should now be a binary"
