@@ -1,0 +1,50 @@
+#!/bin/sh
+source ../common.sh
+
+# Node.js version to install
+node_version=v5.11.0
+
+# Load zsh-nvm and install Node.js in subshell
+(load_zsh_nvm && nvm install "$node_version" && [[ "$(node --version)" == "$node_version" ]]) || die "node wasn't installed"
+
+# Check node isn't available
+[[ "$(node --version)" != "$node_version" ]] || die "node shouldn't be available $(node --version)"
+
+# Set NVM_LAZY_LOAD to true
+export NVM_LAZY_LOAD=true
+
+# Set NVM_NO_USE to true
+export NVM_NO_USE=true
+
+# Load zsh-nvm
+load_zsh_nvm
+
+# Check nvm is a lazy load function
+[[ $(which nvm) == *"_zsh_nvm_load"* ]] || die "nvm should be a lazy load function"
+
+# Check node is not available
+[[ "$(command -v node)" == "" ]] || die "node should not be available"
+
+# Check npm is not available
+[[ "$(command -v npm)" == "" ]] || die "npm should not be available"
+
+# Init lazy loader
+nvm --version || die "couldn't run lazy loader"
+
+# Check nvm is not a lazy load function
+[[ $(which nvm) != *"_zsh_nvm_load"* ]] || die "nvm should not be a lazy load function"
+
+# Check node is still not available
+[[ "$(command -v node)" == "" ]] || die "node should not be available"
+
+# Check npm is still not available
+[[ "$(command -v npm)" == "" ]] || die "npm should not be available"
+
+# Manually load node
+nvm use "$node_version"
+
+# Check node is a binary
+[[ "$(command -v node)" == "$(nvm_version_path $node_version)/bin/node" ]] || die "node should now be a binary"
+
+# Check npm is a binary
+[[ "$(command -v npm)" == "$(nvm_version_path $node_version)/bin/npm" ]] || die "npm should now be a binary"
