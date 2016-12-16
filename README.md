@@ -54,19 +54,6 @@ antigen bundle lukechilds/zsh-nvm
 
 Note: If `nvm` doesn't exist in this directory it'll be automatically installed when you start a session.
 
-### Don't autoload node
-
-By default when `nvm` is loaded it'll automatically run `nvm use default` and load your default `node` version along with `npm` and any global modules. You can disable this behaviour by exporting the `NVM_NO_USE` environment variable and setting it to `true`. It must be set before `zsh-nvm` is loaded.
-
-If you enable this option you will then need to manually run `nvm use <version>` before you can use `node`.
-
-For example, if you are using antigen, you would put the following in your `.zshrc`:
-
-```shell
-export NVM_NO_USE=true
-antigen bundle lukechilds/zsh-nvm
-```
-
 ### Lazy Loading
 
 If you find `nvm` adds too much lag to your shell startup you can enable lazy loading by exporting the `NVM_LAZY_LOAD` environment variable and setting it to `true`. It must be set before `zsh-nvm` is loaded.
@@ -91,6 +78,19 @@ Performance comparison:
 ```
 
 Note: This feature is experimental, use with caution.
+
+### Don't autoload node
+
+By default when `nvm` is loaded it'll automatically run `nvm use default` and load your default `node` version along with `npm` and any global modules. You can disable this behaviour by exporting the `NVM_NO_USE` environment variable and setting it to `true`. It must be set before `zsh-nvm` is loaded.
+
+If you enable this option you will then need to manually run `nvm use <version>` before you can use `node`.
+
+For example, if you are using antigen, you would put the following in your `.zshrc`:
+
+```shell
+export NVM_NO_USE=true
+antigen bundle lukechilds/zsh-nvm
+```
 
 ## Installation
 
