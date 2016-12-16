@@ -1,0 +1,46 @@
+#!/bin/sh
+source ../common.sh
+
+# This test will hang if it fails
+
+# Node.js version to install
+node_version=v5.11.0
+
+# Load zsh-nvm and install Node.js in subshell
+(load_zsh_nvm && nvm install "$node_version" && [[ "$(node --version)" == "$node_version" ]]) || die "node wasn't installed"
+
+# Load zsh-nvm and install htconvert in subshell
+(load_zsh_nvm && npm install -g htconvert@1.0.4 && [[ "$(htconvert --version)" == "1.0.4" ]]) || die "htconvert wasn't installed"
+
+# Check node isn't available
+[[ "$(node --version)" != "$node_version" ]] || die "node shouldn't be available $(node --version)"
+
+# Set NVM_LAZY_LOAD to true
+export NVM_LAZY_LOAD=true
+
+# Set htconvert alias
+alias htconvert='echo htconvert alias'
+
+# Load zsh-nvm
+load_zsh_nvm
+
+# Check nvm is a lazy load function
+[[ $(which nvm) == *"_zsh_nvm_load"* ]] || die "nvm should be a lazy load function"
+
+# Check node is a lazy load function
+[[ $(command -v node) == "node" ]] || die "node should be a shell function"
+
+# Check npm is a lazy load function
+[[ $(command -v npm) == "npm" ]] || die "npm should be a shell function"
+
+# Init lazy loader
+node --version || die "couldn't run lazy loader"
+
+# Check nvm is not a lazy load function
+[[ $(which nvm) != *"_zsh_nvm_load"* ]] || die "nvm should not be a lazy load function"
+
+# Check node is a binary
+[[ "$(command -v node)" == "$(nvm_version_path $node_version)/bin/node" ]] || die "node should now be a binary"
+
+# Check npm is a binary
+[[ "$(command -v npm)" == "$(nvm_version_path $node_version)/bin/npm" ]] || die "npm should now be a binary"
