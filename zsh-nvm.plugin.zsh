@@ -78,11 +78,11 @@ _zsh_nvm_lazy_load() {
   # Add nvm
   global_binaries+=('nvm')
 
-  # Remove any binaries that conflict with current globals
+  # Remove any binaries that conflict with current aliases
   local cmds
   cmds=()
   for bin in $global_binaries; do
-    _zsh_nvm_has $bin || cmds+=($bin)
+    [[ "$(which $bin)" = "$bin: aliased to "* ]] || cmds+=($bin)
   done
 
   # Create function for each command
