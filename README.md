@@ -54,7 +54,7 @@ antigen bundle lukechilds/zsh-nvm
 
 Note: If `nvm` doesn't exist in this directory it'll be automatically installed when you start a session.
 
-### Manually load node
+### Don't autoload node
 
 By default when `nvm` is loaded it'll automatically run `nvm use default` and load your default `node` version along with `npm` and any global modules. You can disable this behaviour by exporting the `NVM_NO_USE` environment variable and setting it to `true`. It must be set before `zsh-nvm` is loaded.
 
