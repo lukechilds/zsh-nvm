@@ -75,6 +75,9 @@ _zsh_nvm_lazy_load() {
     global_binaries=($(_zsh_nvm_global_binaries))
   fi
 
+  # Add yarn lazy loader if it's been installed by something other than npm
+  _zsh_nvm_has yarn && global_binaries+=('yarn')
+
   # Add nvm
   global_binaries+=('nvm')
 
