@@ -183,3 +183,5 @@ if [[ "$ZSH_NVM_NO_LOAD" != true ]]; then
   fi
 
 fi
+
+return true
