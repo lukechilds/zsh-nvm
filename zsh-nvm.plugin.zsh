@@ -158,14 +158,14 @@ _zsh_nvm_auto_use() {
   local node_version="$(nvm version)"
   local nvmrc_path="$(nvm_find_nvmrc)"
 
-  if [ -n "$nvmrc_path" ]; then
+  if [[ -n "$nvmrc_path" ]]; then
     local nvmrc_node_version=$(nvm version "$(cat "${nvmrc_path}")")
 
-    if [ "$nvmrc_node_version" != "N/A" ] && [ "$nvmrc_node_version" != "$node_version" ]; then
+    if [[ "$nvmrc_node_version" != "N/A" ]] && [[ "$nvmrc_node_version" != "$node_version" ]]; then
       nvm use
       export NVM_AUTO_USE_ACTIVE=true
     fi
-  elif [ "$node_version" != "$(nvm version default)" ] && [ "$NVM_AUTO_USE_ACTIVE" = true ]; then
+  elif [[ "$node_version" != "$(nvm version default)" ]] && [[ "$NVM_AUTO_USE_ACTIVE" = true ]]; then
     echo "Reverting to nvm default version"
     nvm use default
   fi
