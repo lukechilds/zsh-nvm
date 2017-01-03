@@ -147,6 +147,23 @@ _zsh_nvm_revert() {
   fi
 }
 
+autoload -U add-zsh-hook
+_zsh_nvm_auto_use() {
+  local node_version="$(nvm version)"
+  local nvmrc_path="$(nvm_find_nvmrc)"
+
+  if [ -n "$nvmrc_path" ]; then
+    local nvmrc_node_version=$(nvm version "$(cat "${nvmrc_path}")")
+
+    if [ "$nvmrc_node_version" != "N/A" ] && [ "$nvmrc_node_version" != "$node_version" ]; then
+      nvm install
+    fi
+  elif [ "$node_version" != "$(nvm version default)" ]; then
+    echo "Reverting to nvm default version"
+    nvm use default
+  fi
+}
+
 # Don't init anything if this is true (debug/testing only)
 if [[ "$ZSH_NVM_NO_LOAD" != true ]]; then
 
@@ -158,6 +175,9 @@ if [[ "$ZSH_NVM_NO_LOAD" != true ]]; then
 
     # Load it
     [[ "$NVM_LAZY_LOAD" == true ]] && _zsh_nvm_lazy_load || _zsh_nvm_load
+
+    # Auto use nvm on chpwd
+    [[ "$NVM_AUTO_USE" == true ]] && add-zsh-hook chpwd _zsh_nvm_auto_use && _zsh_nvm_auto_use
   fi
 
 fi
