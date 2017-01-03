@@ -149,6 +149,8 @@ _zsh_nvm_revert() {
 
 autoload -U add-zsh-hook
 _zsh_nvm_auto_use() {
+  _zsh_nvm_has nvm_find_nvmrc || return
+
   local node_version="$(nvm version)"
   local nvmrc_path="$(nvm_find_nvmrc)"
 
