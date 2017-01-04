@@ -159,7 +159,7 @@ _zsh_nvm_auto_use() {
   local nvmrc_path="$(nvm_find_nvmrc)"
 
   if [[ -n "$nvmrc_path" ]]; then
-    local nvmrc_node_version=$(nvm version "$(cat "${nvmrc_path}")")
+    local nvmrc_node_version="$(nvm version $(cat "$nvmrc_path"))"
 
     if [[ "$nvmrc_node_version" != "N/A" ]]; then
       [[ "$nvmrc_node_version" != "$node_version" ]] && nvm use && export NVM_AUTO_USE_ACTIVE=true
