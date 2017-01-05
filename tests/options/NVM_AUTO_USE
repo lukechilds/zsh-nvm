@@ -1,0 +1,42 @@
+#!/bin/sh
+source ../common.sh
+
+# Setup .nvmrc dir
+local nvmrc_dir="$test_dir/nvmrc"
+local no_nvmrc_dir="$test_dir/no-nvmrc"
+local nvmrc="$nvmrc_dir/.nvmrc"
+mkdir "$no_nvmrc_dir"
+mkdir "$nvmrc_dir"
+touch "$nvmrc"
+
+# Set NVM_AUTO_USE to true
+export NVM_AUTO_USE=true
+
+# Load zsh-nvm
+load_zsh_nvm
+
+# Install Node.js 5
+nvm install 5 && [[ "$(node --version)" == "v5."* ]] || die "node 5 wasn't installed"
+
+# Install Node.js 6
+nvm install 6 && [[ "$(node --version)" == "v6."* ]] || die "node 5 wasn't installed"
+
+# Check cd into folder with .nvmrc uses v5
+echo 5 > "$nvmrc"
+(cd "$nvmrc_dir" && [[ "$(node --version)" == "v5."* ]]) || die "Didn't auto switch to node 5"
+
+# Check cd into folder with .nvmrc keeps v6
+echo 6 > "$nvmrc"
+(cd "$nvmrc_dir" && [[ "$(node --version)" == "v6."* ]]) || die "Didn't keep node 5"
+
+# Check cd into folder with .nvmrc installs v7
+echo 7 > "$nvmrc"
+(cd "$nvmrc_dir" && [[ "$(node --version)" == "v7."* ]]) || die "Didn't install node 7"
+nvm alias default 6 # Make sure 6 is still default not 7
+
+# Check cd into folder with no .nvmrc keeps manually set version
+(nvm use 5 && cd "$no_nvmrc_dir" && [[ "$(node --version)" == "v5."* ]]) || die "Reverted to default node version after manual use and cd"
+
+# Check cd into folder with no .nvmrc reverts to default version after auto use
+echo 5 > "$nvmrc"
+(cd "$nvmrc_dir" && [[ "$(node --version)" == "v5."* ]] && cd "$no_nvmrc_dir" && [[ "$(node --version)" == "v6."* ]]) || die "Didn't revert to default node version after auto use and cd"
