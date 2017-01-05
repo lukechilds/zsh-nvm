@@ -92,6 +92,19 @@ export NVM_NO_USE=true
 antigen bundle lukechilds/zsh-nvm
 ```
 
+### Auto use
+
+If you have lots of projects with an `.nvmrc` file you may find the auto use option helpful. If it's enabled, when you `cd` into a directory with an `.nvmrc` file, `zsh-nvm` will automatically load or install the required node version in `.nvmrc`. You can enable it by exporting the `NVM_AUTO_USE` environment variable and setting it to `true`. It must be set before `zsh-nvm` is loaded.
+
+If you enable this option and don't have `nvm` loaded in the current session (`NVM_LAZY_LOAD` or `NVM_NO_USE`) it won't work until you've loaded `nvm`.
+
+For example, if you are using antigen, you would put the following in your `.zshrc`:
+
+```shell
+export NVM_AUTO_USE=true
+antigen bundle lukechilds/zsh-nvm
+```
+
 ## Installation
 
 ### Using [Antigen](https://github.com/zsh-users/antigen)
