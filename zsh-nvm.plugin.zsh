@@ -190,4 +190,4 @@ if [[ "$ZSH_NVM_NO_LOAD" != true ]]; then
 
 fi
 
-return true
+return 0
