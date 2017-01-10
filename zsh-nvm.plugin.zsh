@@ -189,3 +189,7 @@ if [[ "$ZSH_NVM_NO_LOAD" != true ]]; then
   fi
 
 fi
+
+# Make sure we always return good exit code
+# We can't `return 0` because that breaks antigen
+true
