@@ -77,8 +77,6 @@ Performance comparison:
 ( _zsh_nvm_lazy_load; )  0.01s user 0.01s system 168% cpu 0.012 total
 ```
 
-Note: This feature is experimental, use with caution.
-
 ### Don't autoload node
 
 By default when `nvm` is loaded it'll automatically run `nvm use default` and load your default `node` version along with `npm` and any global modules. You can disable this behaviour by exporting the `NVM_NO_USE` environment variable and setting it to `true`. It must be set before `zsh-nvm` is loaded.
