@@ -61,7 +61,7 @@ _zsh_nvm_load() {
         _zsh_nvm_nvm "$@"
         export NVM_AUTO_USE_ACTIVE=false
         ;;
-      'install')
+      'install' | 'i')
         _zsh_nvm_install_wrapper "$@"
         ;;
       *)
