@@ -179,11 +179,15 @@ _zsh_nvm_install_wrapper() {
   case $2 in
     'rc')
       NVM_NODEJS_ORG_MIRROR=https://nodejs.org/download/rc/ nvm install node
+      echo "Clearing mirror cache..."
       nvm ls-remote > /dev/null 2>&1
+      echo "Done!"
       ;;
     'nightly')
       NVM_NODEJS_ORG_MIRROR=https://nodejs.org/download/nightly/ nvm install node
+      echo "Clearing mirror cache..."
       nvm ls-remote > /dev/null 2>&1
+      echo "Done!"
       ;;
     *)
       _zsh_nvm_nvm "$@"
