@@ -178,13 +178,13 @@ _zsh_nvm_auto_use() {
 _zsh_nvm_install_wrapper() {
   case $2 in
     'rc')
-      NVM_NODEJS_ORG_MIRROR=https://nodejs.org/download/rc/ nvm install node
+      NVM_NODEJS_ORG_MIRROR=https://nodejs.org/download/rc/ nvm install node && nvm alias rc "$(node --version)"
       echo "Clearing mirror cache..."
       nvm ls-remote > /dev/null 2>&1
       echo "Done!"
       ;;
     'nightly')
-      NVM_NODEJS_ORG_MIRROR=https://nodejs.org/download/nightly/ nvm install node
+      NVM_NODEJS_ORG_MIRROR=https://nodejs.org/download/nightly/ nvm install node && nvm alias nightly "$(node --version)"
       echo "Clearing mirror cache..."
       nvm ls-remote > /dev/null 2>&1
       echo "Done!"
