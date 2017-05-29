@@ -39,6 +39,23 @@ Previous HEAD position was 56417f8... v0.31.3
 HEAD is now at 2176894... v0.31.0
 ```
 
+### Install
+
+You can install the latest Node.js nightlies or release candidates with `npm install nightly|rc`. Aliases will automatically be created so you can easily `nvm use nightly|rc` in the future:
+
+```
+% nvm install rc
+Downloading and installing node v8.0.0-rc.1...
+Downloading https://nodejs.org/download/rc//v8.0.0-rc.1/node-v8.0.0-rc.1-darwin-x64.tar.xz...
+######################################################################## 100.0%
+Computing checksum with shasum -a 256
+Checksums matched!
+Now using node v8.0.0-rc.1 (npm v5.0.0-beta.56)
+rc -> v8.0.0-rc.1
+Clearing mirror cache...
+Done!
+```
+
 ## Options
 
 ### Custom Directory
