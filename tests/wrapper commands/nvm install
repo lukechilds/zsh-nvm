@@ -1,0 +1,14 @@
+#!/bin/sh
+source ../common.sh
+
+# Load zsh-nvm
+load_zsh_nvm
+
+# Fallback to default nvm install
+nvm install 5 && [[ "$(node --version)" == "v5."* ]] || die "nvm install 5 didn't fall back to default nvm install"
+
+# Install Nightly
+nvm install nightly && [[ "$(node --version)" == *"nightly"* ]] || die "nvm install nightly didn't install a nightly"
+
+# Install Release Candidate
+nvm install rc && [[ "$(node --version)" == *"rc"* ]] || die "nvm install rc didn't install a release candidate"
