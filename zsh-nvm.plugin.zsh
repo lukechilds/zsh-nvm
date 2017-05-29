@@ -61,6 +61,9 @@ _zsh_nvm_load() {
         _zsh_nvm_nvm "$@"
         export NVM_AUTO_USE_ACTIVE=false
         ;;
+      'install')
+        _zsh_nvm_install_wrapper "$@"
+        ;;
       *)
         _zsh_nvm_nvm "$@"
         ;;
@@ -170,6 +173,20 @@ _zsh_nvm_auto_use() {
     echo "Reverting to nvm default version"
     nvm use default
   fi
+}
+
+_zsh_nvm_install_wrapper() {
+  case $2 in
+    'rc')
+      NVM_NODEJS_ORG_MIRROR=https://nodejs.org/download/rc/ nvm install node
+      ;;
+    'nightly')
+      NVM_NODEJS_ORG_MIRROR=https://nodejs.org/download/nightly/ nvm install node
+      ;;
+    *)
+      _zsh_nvm_nvm "$@"
+      ;;
+  esac
 }
 
 # Don't init anything if this is true (debug/testing only)
