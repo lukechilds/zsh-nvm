@@ -56,6 +56,8 @@ Clearing mirror cache...
 Done!
 ```
 
+> **Note:** This is a bit of a hack and leaving rc|nightly versions installed may break nvm when it eventually supports them itself. It's recommended that you don't leave the these versions of Node.js installed. Install them, test/play with them and then uninstall them when you're done.
+
 ## Options
 
 ### Custom Directory
