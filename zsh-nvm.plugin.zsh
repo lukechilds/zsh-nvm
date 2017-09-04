@@ -196,6 +196,7 @@ _zsh_nvm_install_wrapper() {
 }
 
 _zsh_nvm_add_local_bin_path() {
+  _zsh_nvm_has npm || return # No-op until we have a copy of node in our env.
   local nearest_package=$(nvm_find_up package.json)
   # Skip if we're moving within a project (npm bin is slow).
   #
