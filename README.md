@@ -122,6 +122,17 @@ export NVM_AUTO_USE=true
 antigen bundle lukechilds/zsh-nvm
 ```
 
+### Local bins
+
+If your projects include dependencies with binaries, this ensures that they take precedence on your `$PATH` over globally installed ones.
+
+For example, if you are using antigen, you would put the following in your `.zshrc`:
+
+```shell
+export NVM_PREFER_LOCAL_BINS=true
+antigen bundle lukechilds/zsh-nvm
+```
+
 ## Installation
 
 ### Using [Antigen](https://github.com/zsh-users/antigen)
