@@ -5,6 +5,7 @@ source ../common.sh
 load_zsh_nvm
 
 # Check unwrapped nvm doesn't have revert command
+echo $(_zsh_nvm_nvm revert)
 _zsh_nvm_nvm revert && die "Unwrapped nvm already has revert command"
 
 # Check nvm is wrapped with our revert command
