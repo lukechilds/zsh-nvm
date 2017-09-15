@@ -92,7 +92,7 @@ _zsh_nvm_lazy_load() {
   local cmds
   cmds=()
   for bin in $global_binaries; do
-    [[ "$(which $bin)" = "$bin: aliased to "* ]] || cmds+=($bin)
+    [[ "$(which $bin 2> /dev/null)" = "$bin: aliased to "* ]] || cmds+=($bin)
   done
 
   # Create function for each command
