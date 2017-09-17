@@ -1,0 +1,50 @@
+#!/bin/sh
+source ../common.sh
+
+# Setup projects in tmp, so we don't have ancestor paths of this repo messing
+# with things.
+cd $(mktemp -d)
+echo "Running NVM_PREFER_LOCAL_BINS in $(pwd)\n"
+
+mkdir -p package/src/a/b
+touch package/package.json
+mkdir -p package/vendor
+touch package/vendor/package.json
+
+# Load it.
+export NVM_PREFER_LOCAL_BINS=true
+load_zsh_nvm
+
+# Check cding without node installed (shouldn't fail)
+cd ./package
+cd ./src/a/b
+cd ../../../..
+
+# Now test with node installed
+nvm install 8
+nvm use 8
+# This is our base path, without any local binary paths in it.
+base_path=$PATH
+# npm bin can resolve to a different path (/private/var instead of /var) on some
+# platforms. It also resolves to the current directory if there is no
+# package.json up the current path. So, we use it to expand our path.
+sandbox=$(dirname $(dirname $(npm bin)))
+
+# Check cd directly into a package directory
+cd ./package
+[[ "$PATH" == "$sandbox/package/node_modules/.bin:$base_path" ]] || die "Didn't prepend local bin dir to path when moving into package directory"
+
+# Check package subdirs
+cd ./src
+cd ./a
+cd ./b
+[[ "$PATH" == "$sandbox/package/node_modules/.bin:$base_path" ]] || die "Didn't prepend local bin dir to path when moving into package subdirectories"
+
+# Check nested packages
+cd ../../..
+cd ./vendor
+[[ "$PATH" == "$sandbox/package/vendor/node_modules/.bin:$base_path" ]] || die "Didn't prepend local bin dir to path when moving into a nested package"
+
+# Check leaving
+cd ../..
+[[ "$PATH" == "$base_path" ]] || die "Didn't remove local bin dir when leaving a package directory"

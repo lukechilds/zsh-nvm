@@ -195,6 +195,28 @@ _zsh_nvm_install_wrapper() {
   esac
 }
 
+_zsh_nvm_add_local_bin_path() {
+  _zsh_nvm_has npm || return # No-op until we have a copy of node in our env.
+  local nearest_package=$(nvm_find_up package.json)
+  # Skip if we're moving within a project (npm bin is slow).
+  #
+  # Also notice that we prepend a value in front of the variable so that it
+  # isn't expanded by %~ prompts.
+  [[ "z$nearest_package" == "$NVM_CURRENT_PACKAGE_PATH" ]] && return
+  NVM_CURRENT_PACKAGE_PATH=z$nearest_package
+
+  # Ensure a clean slate; so that we are not prepending paths forever.
+  if [[ -n "$NVM_PATH_WITHOUT_LOCAL_BINS" ]]; then
+    PATH=$NVM_PATH_WITHOUT_LOCAL_BINS
+    unset NVM_PATH_WITHOUT_LOCAL_BINS
+  fi
+
+  if [[ -n "$nearest_package" ]]; then
+    NVM_PATH_WITHOUT_LOCAL_BINS=$PATH
+    PATH=$(npm bin):$PATH
+  fi
+}
+
 # Don't init anything if this is true (debug/testing only)
 if [[ "$ZSH_NVM_NO_LOAD" != true ]]; then
 
@@ -209,6 +231,9 @@ if [[ "$ZSH_NVM_NO_LOAD" != true ]]; then
 
     # Auto use nvm on chpwd
     [[ "$NVM_AUTO_USE" == true ]] && add-zsh-hook chpwd _zsh_nvm_auto_use && _zsh_nvm_auto_use
+
+    # Ensure that local bins take precedence on $PATH.
+    [[ "$NVM_PREFER_LOCAL_BINS" == true ]] && add-zsh-hook chpwd _zsh_nvm_add_local_bin_path && _zsh_nvm_add_local_bin_path
   fi
 
 fi
