@@ -41,7 +41,7 @@ HEAD is now at 2176894... v0.31.0
 
 ### Install
 
-You can install the latest Node.js nightlies or release candidates with `npm install nightly|rc`. Aliases will automatically be created so you can easily `nvm use nightly|rc` in the future:
+You can install the latest Node.js nightlies or release candidates with `nvm install nightly|rc`. Aliases will automatically be created so you can easily `nvm use nightly|rc` in the future:
 
 ```
 % nvm install rc
