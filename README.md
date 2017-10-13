@@ -8,6 +8,59 @@ The plugin will install the latest stable release of `nvm` if you don't already 
 
 Although this is written as a zsh plugin, it also works with bash if you follow the [manual installation instructions](#manually).
 
+## Installation
+
+### Using [Antigen](https://github.com/zsh-users/antigen)
+
+Bundle `zsh-nvm` in your `.zshrc`
+
+```shell
+antigen bundle lukechilds/zsh-nvm
+```
+
+### Using [zplug](https://github.com/b4b4r07/zplug)
+Load `zsh-nvm` as a plugin in your `.zshrc`
+
+```shell
+zplug "lukechilds/zsh-nvm"
+
+```
+### Using [zgen](https://github.com/tarjoilija/zgen)
+
+Include the load command in your `.zshrc`
+
+```shell
+zgen load lukechilds/zsh-nvm
+```
+
+### As an [Oh My ZSH!](https://github.com/robbyrussell/oh-my-zsh) custom plugin
+
+Clone `zsh-nvm` into your custom plugins repo
+
+```shell
+git clone https://github.com/lukechilds/zsh-nvm ~/.oh-my-zsh/custom/plugins/zsh-nvm
+```
+Then load as a plugin in your `.zshrc`
+
+```shell
+plugins+=(zsh-nvm)
+```
+
+Keep in mind that plugins need to be added before `oh-my-zsh.sh` is sourced.
+
+### Manually
+Clone this repository somewhere (`~/.zsh-nvm` for example)
+
+```shell
+git clone https://github.com/lukechilds/zsh-nvm.git ~/.zsh-nvm
+```
+Then source it in your `.zshrc` (or `.bashrc`)
+
+```shell
+source ~/.zsh-nvm/zsh-nvm.plugin.zsh
+```
+
+
 ## Usage
 
 Once the plugin's installed `nvm` will be available. You'll probably want to load this as one of your first plugins so `node`/`npm` is available for any other plugins that may require them.
@@ -120,58 +173,6 @@ For example, if you are using antigen, you would put the following in your `.zsh
 ```shell
 export NVM_AUTO_USE=true
 antigen bundle lukechilds/zsh-nvm
-```
-
-## Installation
-
-### Using [Antigen](https://github.com/zsh-users/antigen)
-
-Bundle `zsh-nvm` in your `.zshrc`
-
-```shell
-antigen bundle lukechilds/zsh-nvm
-```
-
-### Using [zplug](https://github.com/b4b4r07/zplug)
-Load `zsh-nvm` as a plugin in your `.zshrc`
-
-```shell
-zplug "lukechilds/zsh-nvm"
-
-```
-### Using [zgen](https://github.com/tarjoilija/zgen)
-
-Include the load command in your `.zshrc`
-
-```shell
-zgen load lukechilds/zsh-nvm
-```
-
-### As an [Oh My ZSH!](https://github.com/robbyrussell/oh-my-zsh) custom plugin
-
-Clone `zsh-nvm` into your custom plugins repo
-
-```shell
-git clone https://github.com/lukechilds/zsh-nvm ~/.oh-my-zsh/custom/plugins/zsh-nvm
-```
-Then load as a plugin in your `.zshrc`
-
-```shell
-plugins+=(zsh-nvm)
-```
-
-Keep in mind that plugins need to be added before `oh-my-zsh.sh` is sourced.
-
-### Manually
-Clone this repository somewhere (`~/.zsh-nvm` for example)
-
-```shell
-git clone https://github.com/lukechilds/zsh-nvm.git ~/.zsh-nvm
-```
-Then source it in your `.zshrc` (or `.bashrc`)
-
-```shell
-source ~/.zsh-nvm/zsh-nvm.plugin.zsh
 ```
 
 ## Tests
