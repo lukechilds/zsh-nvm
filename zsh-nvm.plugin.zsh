@@ -176,23 +176,28 @@ _zsh_nvm_auto_use() {
 }
 
 _zsh_nvm_install_wrapper() {
-  case $2 in
-    'rc')
-      NVM_NODEJS_ORG_MIRROR=https://nodejs.org/download/rc/ nvm install node && nvm alias rc "$(node --version)"
-      echo "Clearing mirror cache..."
-      nvm ls-remote > /dev/null 2>&1
-      echo "Done!"
-      ;;
-    'nightly')
-      NVM_NODEJS_ORG_MIRROR=https://nodejs.org/download/nightly/ nvm install node && nvm alias nightly "$(node --version)"
-      echo "Clearing mirror cache..."
-      nvm ls-remote > /dev/null 2>&1
-      echo "Done!"
-      ;;
-    *)
-      _zsh_nvm_nvm "$@"
-      ;;
-  esac
+	local extra_version
+	local nodejs_org_mirror
+	local version_list
+	local version_latest
+
+	if [[ $2 == 'rc' || $2 == 'nightly' ]]; then
+		extra_version=$2
+		nodejs_org_mirror=https://nodejs.org/download/$extra_version/
+		version_list="$(NVM_NODEJS_ORG_MIRROR=$nodejs_org_mirror nvm ls-remote |
+			 tail -n 1)"
+		version_latest="$(echo "$version_list" \
+                       | sed -n "s/.*\(v.*\)/\1/p" \
+                       | awk '{print $1}' )"
+		echo "Latest $extra_version: $version_latest."
+		NVM_NODEJS_ORG_MIRROR=$nodejs_org_mirror \
+			nvm install $version_latest && nvm alias $extra_version "$(node --version)"
+		echo "Clearing mirror cache..."
+		nvm ls-remote >/dev/null 2>&1
+		echo "Done!"
+	else
+		_zsh_nvm_nvm "$@"
+	fi
 }
 
 # Don't init anything if this is true (debug/testing only)
