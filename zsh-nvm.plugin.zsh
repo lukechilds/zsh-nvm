@@ -60,6 +60,7 @@ _zsh_nvm_load() {
       'use')
         _zsh_nvm_nvm "$@"
         export NVM_AUTO_USE_ACTIVE=false
+        export NVM_AUTO_REVERT=false
         ;;
       'install' | 'i')
         _zsh_nvm_install_wrapper "$@"
@@ -169,7 +170,7 @@ _zsh_nvm_auto_use() {
     elif [[ "$nvmrc_node_version" != "$node_version" ]]; then
       nvm use && export NVM_AUTO_USE_ACTIVE=true
     fi
-  elif [[ "$node_version" != "$(nvm version default)" ]] && [[ "$NVM_AUTO_USE_ACTIVE" = true ]]; then
+  elif [[ "$node_version" != "$(nvm version default)" ]] && [[ "$NVM_AUTO_USE_ACTIVE" = true ]] && [[ "$NVM_AUTO_REVERT" = true ]]; then
     echo "Reverting to nvm default version"
     nvm use default
   fi
