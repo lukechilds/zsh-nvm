@@ -152,7 +152,7 @@ zgen load lukechilds/zsh-nvm
 Clone `zsh-nvm` into your custom plugins repo
 
 ```shell
-git clone https://github.com/lukechilds/zsh-nvm ~/.oh-my-zsh/custom/plugins/zsh-nvm
+git clone https://github.com/lukechilds/zsh-nvm "$ZSH_CUSTOM/plugins/zsh-nvm"
 ```
 Then load as a plugin in your `.zshrc`
 
