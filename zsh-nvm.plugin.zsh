@@ -13,7 +13,7 @@ _zsh_nvm_has() {
 }
 
 _zsh_nvm_latest_release_tag() {
-  echo $(cd "$NVM_DIR" && git fetch --quiet origin && git describe --abbrev=0 --tags --match "v[0-9]*" origin)
+  echo $(cd "$NVM_DIR" && git fetch --quiet origin && git describe --abbrev=0 --tags --match "v[0-9]*")
 }
 
 _zsh_nvm_install() {
