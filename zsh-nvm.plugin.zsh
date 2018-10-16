@@ -41,8 +41,10 @@ _zsh_nvm_load() {
   # Source nvm (check if `nvm use` should be ran after load)
   if [[ "$NVM_NO_USE" == true ]]; then
     source "$NVM_DIR/nvm.sh" --no-use
+    source "$NVM_DIR/bash_completion"
   else
     source "$NVM_DIR/nvm.sh"
+    source "$NVM_DIR/bash_completion"
   fi
 
   # Rename main nvm function
