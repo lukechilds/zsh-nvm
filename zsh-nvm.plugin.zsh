@@ -18,7 +18,7 @@ _zsh_nvm_latest_release_tag() {
 
 _zsh_nvm_install() {
   echo "Installing nvm..."
-  git clone https://github.com/creationix/nvm.git "$NVM_DIR"
+  git clone https://github.com/nvm-sh/nvm.git "$NVM_DIR"
   $(cd "$NVM_DIR" && git checkout --quiet "$(_zsh_nvm_latest_release_tag)")
 }
 
