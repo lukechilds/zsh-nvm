@@ -162,6 +162,17 @@ plugins+=(zsh-nvm)
 
 Keep in mind that plugins need to be added before `oh-my-zsh.sh` is sourced.
 
+### Using [Antibody](https://github.com/getantibody/antibody)
+
+Add `zsh-nvm` to your plugins file
+
+```shell
+# e.g. ~/.zsh_plugins.txt
+lukechilds/zsh-nvm
+```
+
+If using [static Antibody loading](https://getantibody.github.io/#static-loading), run your `antibody bundle` command.
+
 ### Manually
 Clone this repository somewhere (`~/.zsh-nvm` for example)
 
