@@ -124,27 +124,23 @@ antigen bundle lukechilds/zsh-nvm
 
 ## Installation
 
+### Using [Antibody](https://github.com/getantibody/antibody)
+
+Add `zsh-nvm` to your plugins file
+
+```shell
+# e.g. ~/.zsh_plugins.txt
+lukechilds/zsh-nvm
+```
+
+If using [static Antibody loading](https://getantibody.github.io/#static-loading), run your `antibody bundle` command.
+
 ### Using [Antigen](https://github.com/zsh-users/antigen)
 
 Bundle `zsh-nvm` in your `.zshrc`
 
 ```shell
 antigen bundle lukechilds/zsh-nvm
-```
-
-### Using [zplug](https://github.com/b4b4r07/zplug)
-Load `zsh-nvm` as a plugin in your `.zshrc`
-
-```shell
-zplug "lukechilds/zsh-nvm"
-
-```
-### Using [zgen](https://github.com/tarjoilija/zgen)
-
-Include the load command in your `.zshrc`
-
-```shell
-zgen load lukechilds/zsh-nvm
 ```
 
 ### As an [Oh My ZSH!](https://github.com/robbyrussell/oh-my-zsh) custom plugin
@@ -162,16 +158,20 @@ plugins+=(zsh-nvm)
 
 Keep in mind that plugins need to be added before `oh-my-zsh.sh` is sourced.
 
-### Using [Antibody](https://github.com/getantibody/antibody)
+### Using [zgen](https://github.com/tarjoilija/zgen)
 
-Add `zsh-nvm` to your plugins file
+Include the load command in your `.zshrc`
 
 ```shell
-# e.g. ~/.zsh_plugins.txt
-lukechilds/zsh-nvm
+zgen load lukechilds/zsh-nvm
 ```
 
-If using [static Antibody loading](https://getantibody.github.io/#static-loading), run your `antibody bundle` command.
+### Using [zplug](https://github.com/b4b4r07/zplug)
+Load `zsh-nvm` as a plugin in your `.zshrc`
+
+```shell
+zplug "lukechilds/zsh-nvm"
+```
 
 ### Manually
 Clone this repository somewhere (`~/.zsh-nvm` for example)
