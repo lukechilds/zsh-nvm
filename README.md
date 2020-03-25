@@ -174,6 +174,13 @@ Then source it in your `.zshrc` (or `.bashrc`)
 source ~/.zsh-nvm/zsh-nvm.plugin.zsh
 ```
 
+#### Add zsh completion
+Add the `~/.zsh-nvm` directory to $fpath by adding a line like this to your `.zshrc` file
+
+```shell
+fpath=(~/.zsh-nvm $fpath)
+``
+
 ## Tests
 
 To run the tests you'll need to install [Urchin](https://github.com/tlevine/urchin#install). You'll also need to run the tests in an environment that doesn't already have `node` or `nvm` loaded.
