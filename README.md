@@ -73,6 +73,18 @@ antigen bundle lukechilds/zsh-nvm
 
 Note: If `nvm` doesn't exist in this directory it'll be automatically installed when you start a session.
 
+### Nvm Completion
+
+`nvm` comes with a default bash_completion profile. If you want to enable it, you can do it by exporting  the `NVM_COMPLETION` environment variable and setting it to `true`. It must be set before `zsh-nvm` is loaded.
+
+For example, if you are using antigen, you would put the following in your `.zshrc`:
+
+```bash
+# Export nvm completion settings for zsh-nvm plugin
+export NVM_COMPLETION=true
+antigen bundle lukechilds/zsh-nvm
+```
+
 ### Lazy Loading
 
 If you find `nvm` adds too much lag to your shell startup you can enable lazy loading by exporting the `NVM_LAZY_LOAD` environment variable and setting it to `true`. It must be set before `zsh-nvm` is loaded.
