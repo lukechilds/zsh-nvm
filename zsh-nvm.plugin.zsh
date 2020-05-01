@@ -71,6 +71,12 @@ _zsh_nvm_load() {
   }
 }
 
+_zsh_nvm_completion() {
+
+  # Add provided nvm completion
+  [[ -r $NVM_DIR/bash_completion ]] && source $NVM_DIR/bash_completion
+}
+
 _zsh_nvm_lazy_load() {
 
   # Get all global node module binaries including node
@@ -207,6 +213,9 @@ if [[ "$ZSH_NVM_NO_LOAD" != true ]]; then
     # Load it
     [[ "$NVM_LAZY_LOAD" == true ]] && _zsh_nvm_lazy_load || _zsh_nvm_load
 
+    # Enable completion
+    [[ "$NVM_COMPLETION" == true ]] && _zsh_nvm_completion
+    
     # Auto use nvm on chpwd
     [[ "$NVM_AUTO_USE" == true ]] && add-zsh-hook chpwd _zsh_nvm_auto_use && _zsh_nvm_auto_use
   fi
