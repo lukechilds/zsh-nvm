@@ -108,6 +108,16 @@ Performance comparison:
 ( _zsh_nvm_lazy_load; )  0.01s user 0.01s system 168% cpu 0.012 total
 ```
 
+#### Extra commands to trigger lazy loading
+By default lazy loading nvm is triggered by running the `nvm`, `node`, `npm` commands or any installed npm global binaries.
+If you want to trigger the lazy loading via extra arbitrary commands you can define `NVM_LAZY_LOAD_EXTRA_COMMANDS` and set it to an array of commands as strings.
+
+```shell
+export NVM_LAZY_LOAD_EXTRA_COMMANDS=('vim', 'ls')
+vim --version
+#node is now loaded
+```
+
 ### Don't autoload node
 
 By default when `nvm` is loaded it'll automatically run `nvm use default` and load your default `node` version along with `npm` and any global modules. You can disable this behaviour by exporting the `NVM_NO_USE` environment variable and setting it to `true`. It must be set before `zsh-nvm` is loaded.
