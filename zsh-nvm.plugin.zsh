@@ -93,6 +93,7 @@ _zsh_nvm_lazy_load() {
 
   # Add nvm
   global_binaries+=('nvm')
+  global_binaries+=($NVM_LAZY_LOAD_EXTRA_COMMANDS)
 
   # Remove any binaries that conflict with current aliases
   local cmds
