@@ -12,7 +12,7 @@ node_version=v5.11.0
 
 # Set NVM_LAZY_LOAD to true
 export NVM_LAZY_LOAD=true
-export NVM_LAZY_LOAD_EXTRA_COMMANDS=('ls' 'whoami')
+export NVM_LAZY_LOAD_EXTRA_COMMANDS=('hostname' 'whoami')
 
 # Load zsh-nvm
 load_zsh_nvm
