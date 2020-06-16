@@ -111,9 +111,10 @@ Performance comparison:
 #### Extra commands to trigger lazy loading
 By default lazy loading nvm is triggered by running the `nvm`, `node`, `npm` commands or any installed npm global binaries.
 If you want to trigger the lazy loading via extra arbitrary commands you can define `NVM_LAZY_LOAD_EXTRA_COMMANDS` and set it to an array of commands as strings.
+This can be usefull if programs are not in the above list of binaries but do depend on the availability of `node`, e.g. a vim plugin.
 
 ```shell
-export NVM_LAZY_LOAD_EXTRA_COMMANDS=('vim', 'ls')
+export NVM_LAZY_LOAD_EXTRA_COMMANDS=('vim')
 vim --version
 #node is now loaded
 ```
