@@ -1,0 +1,51 @@
+#!/bin/sh
+source ../common.sh
+
+# Node.js version to install
+node_version=v5.11.0
+
+# Load zsh-nvm and install Node.js in subshell
+(load_zsh_nvm && nvm install "$node_version" && [[ "$(node --version)" == "$node_version" ]]) || die "node wasn't installed"
+
+# Check node isn't available
+[[ "$(node --version)" != "$node_version" ]] || die "node shouldn't be available $(node --version)"
+
+# Setup .nvmrc dir
+local nvmrc_dir="$test_dir/nvmrc2"
+local no_nvmrc_dir="$test_dir/no-nvmrc2"
+local nvmrc="$nvmrc_dir/.nvmrc"
+mkdir "$no_nvmrc_dir"
+mkdir "$nvmrc_dir"
+touch "$nvmrc"
+
+# Set NVM_LAZY_LOAD to true
+export NVM_LAZY_LOAD=true
+export NVM_AUTO_USE=true
+
+# Load zsh-nvm
+load_zsh_nvm
+
+# Check nvm is a lazy load function
+[[ $(which nvm) == *"_zsh_nvm_load"* ]] || die "nvm should be a lazy load function"
+
+# Check node is a lazy load function
+[[ $(command -v node) == "node" ]] || die "node should be a shell function"
+
+# Check npm is a lazy load function
+[[ $(command -v npm) == "npm" ]] || die "npm should be a shell function"
+
+# Init lazy loader
+node --version || die "couldn't run lazy loader"
+
+# Check nvm is not a lazy load function
+[[ $(which nvm) != *"_zsh_nvm_load"* ]] || die "nvm should not be a lazy load function"
+
+# Check node is a binary
+[[ "$(command -v node)" == "$(nvm_version_path $node_version)/bin/node" ]] || die "node should now be a binary"
+
+# Check npm is a binary
+[[ "$(command -v npm)" == "$(nvm_version_path $node_version)/bin/npm" ]] || die "npm should now be a binary"
+
+# Check cd into folder with .nvmrc keeps v6
+echo 6 > "$nvmrc"
+(cd "$nvmrc_dir" && [[ "$(node --version | tail -1)" == "v6."* ]]) || die "Didn't switch to node 6"
