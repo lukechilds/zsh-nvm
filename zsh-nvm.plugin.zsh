@@ -169,9 +169,15 @@ _zsh_nvm_auto_use() {
   local nvmrc_path="$(nvm_find_nvmrc)"
 
   if [[ -n "$nvmrc_path" ]]; then
+    local nvmrc_dir="$(dirname "$nvmrc_path")"
+    local nvmrc_version="$(cat "$nvmrc_path")"
     local nvmrc_node_version="$(nvm version $(cat "$nvmrc_path"))"
 
-    if [[ "$nvmrc_node_version" = "N/A" ]]; then
+    if [[ -v NVM_AUTO_USE_IGNORE_VERSION ]] && [[ ${NVM_AUTO_USE_IGNORE_VERSION[(Ie)$nvmrc_version]} -gt 0 ]]; then
+      echo "Detected nvm version <$nvmrc_version>, but this version is set to be ignored"
+    elif [[ -v NVM_AUTO_USE_IGNORE_PATH ]] && [[ ${NVM_AUTO_USE_IGNORE_PATH[(Ie)$nvmrc_dir]} -gt 0 ]]; then
+      echo "Detected nvm version <$nvmrc_version>, but this path is set to be ignored"
+    elif [[ "$nvmrc_node_version" = "N/A" ]]; then
       nvm install && export NVM_AUTO_USE_ACTIVE=true
     elif [[ "$nvmrc_node_version" != "$node_version" ]]; then
       nvm use && export NVM_AUTO_USE_ACTIVE=true
