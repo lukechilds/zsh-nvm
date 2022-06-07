@@ -161,6 +161,24 @@ _zsh_nvm_revert() {
   fi
 }
 
+_current_node_version() {
+  local node_path="$(command which node 2>/dev/null)"
+  if [[ -z "${node_path##$NVM_DIR*}" ]]; then
+    node --version 2>/dev/null
+  else
+    printf 'system'
+  fi
+}
+
+_nvm_default_version() {
+  local alias="$(nvm_resolve_alias default)"
+  if [[ "$alias" = 'node' ]]; then
+    nvm_ls node | nvm_grep -e '^v' | nvm_grep -v -e "^v0" | tail -n 1
+  else
+    nvm version default
+  fi
+}
+
 autoload -U add-zsh-hook
 _zsh_nvm_auto_use() {
   _zsh_nvm_has nvm_find_nvmrc || return
@@ -168,10 +186,10 @@ _zsh_nvm_auto_use() {
     return
   fi
 
+  local node_version="$(_current_node_version)"
   local nvmrc_path="$(nvm_find_nvmrc)"
 
   if [[ -n "$nvmrc_path" ]]; then
-    local node_version="$(nvm version)"
     local nvmrc_dir="$(dirname "$nvmrc_path")"
     local nvmrc_version="$(cat "$nvmrc_path")"
     local nvmrc_node_version="$(nvm version $(cat "$nvmrc_path"))"
@@ -185,7 +203,7 @@ _zsh_nvm_auto_use() {
     elif [[ "$nvmrc_node_version" != "$node_version" ]]; then
       nvm use && export NVM_AUTO_USE_ACTIVE=true
     fi
-  elif [[ "$node_version" != "$(nvm version default)" ]] && [[ "$NVM_AUTO_USE_ACTIVE" = true ]]; then
+  elif [[ "$NVM_AUTO_USE_ACTIVE" = true ]] && [[ "$node_version" != "$(_nvm_default_version)" ]]; then
     echo "Reverting to nvm default version"
     nvm use default
   fi
