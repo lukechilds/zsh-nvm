@@ -168,10 +168,10 @@ _zsh_nvm_auto_use() {
     return
   fi
 
-  local node_version="$(nvm version)"
   local nvmrc_path="$(nvm_find_nvmrc)"
 
   if [[ -n "$nvmrc_path" ]]; then
+    local node_version="$(nvm version)"
     local nvmrc_dir="$(dirname "$nvmrc_path")"
     local nvmrc_version="$(cat "$nvmrc_path")"
     local nvmrc_node_version="$(nvm version $(cat "$nvmrc_path"))"
