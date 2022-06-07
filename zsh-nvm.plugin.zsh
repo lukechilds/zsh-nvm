@@ -204,7 +204,7 @@ _zsh_nvm_auto_use() {
       nvm use && export NVM_AUTO_USE_ACTIVE=true
     fi
   elif [[ "$NVM_AUTO_USE_ACTIVE" != false ]] && [[ "$node_version" != "$(_nvm_default_version)" ]]; then
-    echo "Reverting to nvm default version"
+    [[ "$NVM_AUTO_USE_ACTIVE" = true ]] && echo "Reverting to nvm default version"
     nvm use default
   fi
 }
