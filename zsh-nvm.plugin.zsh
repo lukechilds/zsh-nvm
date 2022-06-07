@@ -162,11 +162,19 @@ _zsh_nvm_revert() {
 }
 
 _current_node_version() {
-  local node_path="$(command which node 2>/dev/null)"
-  if [[ -z "${node_path##$NVM_DIR*}" ]]; then
+  if _node_is_nvm; then
     node --version 2>/dev/null
   else
     printf 'system'
+  fi
+}
+
+_node_is_nvm() {
+  local node_path="$(command which node 2>/dev/null)"
+  if [[ -z "${node_path##$NVM_DIR*}" ]]; then
+    return 0
+  else
+    return 1
   fi
 }
 
