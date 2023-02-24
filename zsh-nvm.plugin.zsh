@@ -22,20 +22,6 @@ _zsh_nvm_install() {
   $(builtin cd "$NVM_DIR" && git checkout --quiet "$(_zsh_nvm_latest_release_tag)")
 }
 
-_zsh_nvm_global_binaries() {
-
-  # Look for global binaries
-  local global_binary_paths="$(echo "$NVM_DIR"/v0*/bin/*(N) "$NVM_DIR"/versions/*/*/bin/*(N))"
-
-  # If we have some, format them
-  if [[ -n "$global_binary_paths" ]]; then
-    echo "$NVM_DIR"/v0*/bin/*(N) "$NVM_DIR"/versions/*/*/bin/*(N) |
-      xargs -n 1 basename |
-      sort |
-      uniq
-  fi
-}
-
 _zsh_nvm_load() {
 
   # Source nvm (check if `nvm use` should be ran after load)
@@ -85,7 +71,7 @@ _zsh_nvm_lazy_load() {
   if [[ "$NVM_NO_USE" == true ]]; then
     global_binaries=()
   else
-    global_binaries=($(_zsh_nvm_global_binaries))
+    global_binaries=("$NVM_DIR"/v0*/bin/*(N:t) "$NVM_DIR"/versions/*/*/bin/*(N:t))
   fi
 
   # Add yarn lazy loader if it's been installed by something other than npm
@@ -95,19 +81,22 @@ _zsh_nvm_lazy_load() {
   global_binaries+=('nvm')
   global_binaries+=($NVM_LAZY_LOAD_EXTRA_COMMANDS)
 
+  # Deduplicate
+  typeset -U global_binaries
+
   # Remove any binaries that conflict with current aliases
   local cmds
-  cmds=()
-  for bin in $global_binaries; do
-    [[ "$(which $bin 2> /dev/null)" = "$bin: aliased to "* ]] || cmds+=($bin)
-  done
+  IFS=$'\n' cmds=($(whence -w -- "${global_binaries[@]}" 2> /dev/null))
+  unset IFS
+  cmds=(${cmds#*": alias"})
+  cmds=(${(@q-)cmds%": "*})
 
   # Create function for each command
   for cmd in $cmds; do
 
     # When called, unset all lazy loaders, load nvm then run current command
     eval "$cmd(){
-      unset -f $cmds > /dev/null 2>&1
+      unset -f ${cmds[@]} > /dev/null 2>&1
       _zsh_nvm_load
       $cmd \"\$@\"
     }"
