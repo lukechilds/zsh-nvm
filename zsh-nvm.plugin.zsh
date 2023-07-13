@@ -98,11 +98,13 @@ _zsh_nvm_lazy_load() {
   # Remove any binaries that conflict with current aliases
   local cmds
   cmds=()
+  local bin
   for bin in $global_binaries; do
     [[ "$(which $bin 2> /dev/null)" = "$bin: aliased to "* ]] || cmds+=($bin)
   done
 
   # Create function for each command
+  local cmd
   for cmd in $cmds; do
 
     # When called, unset all lazy loaders, load nvm then run current command
