@@ -111,6 +111,7 @@ _zsh_nvm_lazy_load() {
     eval "$cmd(){
       unset -f $cmds > /dev/null 2>&1
       _zsh_nvm_load
+      [[ \"$NVM_AUTO_USE\" == true ]] && add-zsh-hook chpwd _zsh_nvm_auto_use
       $cmd \"\$@\"
     }"
   done
