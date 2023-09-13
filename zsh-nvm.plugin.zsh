@@ -74,7 +74,13 @@ _zsh_nvm_load() {
 _zsh_nvm_completion() {
 
   # Add provided nvm completion
-  [[ -r $NVM_DIR/bash_completion ]] && source $NVM_DIR/bash_completion
+  # default
+  if [[ -f "$NVM_DIR/bash_completion" ]]; then
+    source "$NVM_DIR/bash_completion"
+  # homebrew
+  elif _zsh_nvm_has brew && [[ -f "$(brew --prefix nvm)/etc/bash_completion.d/nvm" ]]; then
+    source "$(brew --prefix nvm)/etc/bash_completion.d/nvm"
+  fi
 }
 
 _zsh_nvm_lazy_load() {
@@ -218,7 +224,7 @@ if [[ "$ZSH_NVM_NO_LOAD" != true ]]; then
 
     # Enable completion
     [[ "$NVM_COMPLETION" == true ]] && _zsh_nvm_completion
-    
+
     # Auto use nvm on chpwd
     [[ "$NVM_AUTO_USE" == true ]] && add-zsh-hook chpwd _zsh_nvm_auto_use && _zsh_nvm_auto_use
   fi
