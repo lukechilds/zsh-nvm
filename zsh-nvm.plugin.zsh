@@ -29,7 +29,7 @@ _zsh_nvm_global_binaries() {
 
   # If we have some, format them
   if [[ -n "$global_binary_paths" ]]; then
-    echo "$NVM_DIR"/v0*/bin/*(N) "$NVM_DIR"/versions/*/*/bin/*(N) |
+    echo $global_binary_paths |
       xargs -n 1 basename |
       sort |
       uniq
