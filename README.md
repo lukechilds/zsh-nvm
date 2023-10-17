@@ -1,10 +1,6 @@
-# zsh-nvm [![Build Status](https://travis-ci.org/lukechilds/zsh-nvm.svg?branch=master)](https://travis-ci.org/lukechilds/zsh-nvm)
+# zsh-nvm
 
 > Zsh plugin for installing, updating and loading `nvm`
-
-[![GitHub Donate](https://badgen.net/badge/GitHub/Sponsor/D959A7?icon=github)](https://github.com/sponsors/lukechilds)
-[![Bitcoin Donate](https://badgen.net/badge/Bitcoin/Donate/F19537?icon=bitcoin)](https://lu.ke/tip/bitcoin)
-[![Lightning Donate](https://badgen.net/badge/Lightning/Donate/F6BC41?icon=bitcoin-lightning)](https://lu.ke/tip/lightning)
 
 [`nvm`](https://github.com/nvm-sh/nvm) is an awesome tool but it can be kind of a pain to install and keep up to date. This zsh plugin allows you to quickly setup `nvm` once, save it in your dotfiles, then never worry about it again.
 
@@ -151,35 +147,12 @@ antigen bundle lukechilds/zsh-nvm
 
 ## Installation
 
-### Using [Antigen](https://github.com/zsh-users/antigen)
-
-Bundle `zsh-nvm` in your `.zshrc`
-
-```shell
-antigen bundle lukechilds/zsh-nvm
-```
-
-### Using [zplug](https://github.com/b4b4r07/zplug)
-Load `zsh-nvm` as a plugin in your `.zshrc`
-
-```shell
-zplug "lukechilds/zsh-nvm"
-
-```
-### Using [zgen](https://github.com/tarjoilija/zgen)
-
-Include the load command in your `.zshrc`
-
-```shell
-zgen load lukechilds/zsh-nvm
-```
-
 ### As an [Oh My ZSH!](https://github.com/robbyrussell/oh-my-zsh) custom plugin
 
 Clone `zsh-nvm` into your custom plugins repo
 
 ```shell
-git clone https://github.com/lukechilds/zsh-nvm ~/.oh-my-zsh/custom/plugins/zsh-nvm
+git clone https://github.com/gentslava/zsh-nvm $ZSH_CUSTOM/plugins/zsh-nvm
 ```
 Then load as a plugin in your `.zshrc`
 
@@ -193,7 +166,7 @@ Keep in mind that plugins need to be added before `oh-my-zsh.sh` is sourced.
 Clone this repository somewhere (`~/.zsh-nvm` for example)
 
 ```shell
-git clone https://github.com/lukechilds/zsh-nvm.git ~/.zsh-nvm
+git clone https://github.com/gentslava/zsh-nvm.git ~/.zsh-nvm
 ```
 Then source it in your `.zshrc` (or `.bashrc`)
 
@@ -221,8 +194,4 @@ urchin -s zsh tests
 
 ## Related
 
-- [`zsh-better-npm-completion`](https://github.com/lukechilds/zsh-better-npm-completion) - Better completion for `npm`
-
-## License
-
-MIT © Luke Childs
+- [`zsh-better-npm-completion`](https://github.com/gentslava/zsh-better-npm-completion) - Better completion for `npm`
