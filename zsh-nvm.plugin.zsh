@@ -74,7 +74,8 @@ _zsh_nvm_load() {
 _zsh_nvm_completion() {
 
   # Add provided nvm completion
-  [[ -r $NVM_DIR/bash_completion ]] && source $NVM_DIR/bash_completion
+  # [[ -r $NVM_DIR/bash_completion ]] && source $NVM_DIR/bash_completion
+  [[ ! -r $ZSH_NVM_DIR/_nvm || $(date -r $ZSH/plugins/nvm/_nvm +%s) -gt $(date -r $ZSH_NVM_DIR/_nvm +%s) ]] && cp $ZSH/plugins/nvm/_nvm $ZSH_NVM_DIR/_nvm
 }
 
 _zsh_nvm_lazy_load() {
