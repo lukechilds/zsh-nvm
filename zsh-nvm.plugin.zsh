@@ -182,11 +182,19 @@ _zsh_nvm_auto_use() {
     if [[ "$nvmrc_node_version" = "N/A" ]]; then
       nvm install && export NVM_AUTO_USE_ACTIVE=true
     elif [[ "$nvmrc_node_version" != "$node_version" ]]; then
-      nvm use && export NVM_AUTO_USE_ACTIVE=true
+      if [[ "$NVM_SILENT" == true ]]; then
+        nvm use --silent && export NVM_AUTO_USE_ACTIVE=true
+      else
+        nvm use && export NVM_AUTO_USE_ACTIVE=true
+      fi
     fi
   elif [[ "$node_version" != "$(nvm version default)" ]] && [[ "$NVM_AUTO_USE_ACTIVE" = true ]]; then
-    echo "Reverting to nvm default version"
-    nvm use default
+    if [[ "$NVM_SILENT" == true ]]; then
+      nvm use default --silent
+    else
+      echo "Reverting to nvm default version"
+      nvm use default
+    fi
   fi
 }
 
