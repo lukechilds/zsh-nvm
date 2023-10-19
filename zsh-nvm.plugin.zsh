@@ -74,11 +74,18 @@ _zsh_nvm_load() {
 _zsh_nvm_completion() {
 
   # Add provided nvm completion
-  # [[ -r $NVM_DIR/bash_completion ]] && source $NVM_DIR/bash_completion
-
-  if [[ ! -r $ZSH_NVM_DIR/_nvm || $(date -r $ZSH/plugins/nvm/_nvm +%s) -gt $(date -r $ZSH_NVM_DIR/_nvm +%s) ]]; then
-    cp $ZSH/plugins/nvm/_nvm $ZSH_NVM_DIR/_nvm
-    [[ -r $ZSH_NVM_DIR/_nvm ]] && compinit
+  # ZSH competions
+  if [[ -r $ZSH/plugins/nvm/_nvm ]]; then
+    if [[ ! -r $ZSH_NVM_DIR/_nvm || $(date -r $ZSH/plugins/nvm/_nvm +%s) -gt $(date -r $ZSH_NVM_DIR/_nvm +%s) ]]; then
+      cp $ZSH/plugins/nvm/_nvm $ZSH_NVM_DIR/_nvm
+      [[ -r $ZSH_NVM_DIR/_nvm ]] && compinit
+    fi
+  # Default
+  elif [[ -r $NVM_DIR/bash_completion ]]; then
+    source $NVM_DIR/bash_completion
+  # Homebrew
+  elif _zsh_nvm_has brew && [[ -f "$(brew --prefix nvm)/etc/bash_completion.d/nvm" ]]; then
+    source "$(brew --prefix nvm)/etc/bash_completion.d/nvm"
   fi
 }
 
