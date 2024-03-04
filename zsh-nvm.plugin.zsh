@@ -173,7 +173,7 @@ _current_node_version() {
 
 _node_is_nvm() {
   local node_path="$(command which node 2>/dev/null)"
-  if [[ -z "${node_path##$NVM_DIR*}" ]]; then
+  if [[ -n "$node_path" && -z "${node_path##$NVM_DIR*}" ]]; then
     return 0
   else
     return 1
