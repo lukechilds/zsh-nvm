@@ -149,6 +149,17 @@ export NVM_AUTO_USE=true
 antigen bundle lukechilds/zsh-nvm
 ```
 
+### Silent switching
+
+If you use `Auto use` feature of this plugin with a theme that supports node version printing, you may want to disable some messages that nvm prints when it switches between versions. You can disable it by exporting the `NVM_SILENT` environment variable and setting it to `true`.
+
+For example, if you are using antigen, you would put the following in your `.zshrc`:
+
+```shell
+export NVM_SILENT=true
+antigen bundle lukechilds/zsh-nvm
+```
+
 ## Installation
 
 ### Using [Antigen](https://github.com/zsh-users/antigen)
