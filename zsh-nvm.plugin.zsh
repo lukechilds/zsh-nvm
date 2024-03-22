@@ -1,6 +1,10 @@
 ZSH_NVM_DIR=${0:a:h}
 
-[[ -z "$NVM_DIR" ]] && export NVM_DIR="$HOME/.nvm"
+_zsh_nvm_default_install_dir() {
+  [[ -z "${XDG_CONFIG_HOME-}" ]] && echo "$HOME/.nvm" || echo "$XDG_CONFIG_HOME/nvm"
+}
+
+[[ -z "$NVM_DIR" ]] && export NVM_DIR="$(_zsh_nvm_default_install_dir)"
 
 _zsh_nvm_rename_function() {
   test -n "$(declare -f $1)" || return
