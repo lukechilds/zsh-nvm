@@ -69,6 +69,9 @@ _zsh_nvm_load() {
         ;;
     esac
   }
+
+  [[ "$NVM_AUTO_USE" == true ]] && _zsh_nvm_auto_use
+
 }
 
 _zsh_nvm_completion() {
